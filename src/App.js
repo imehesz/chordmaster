@@ -1,25 +1,45 @@
-import logo from './logo.svg';
+import React, { useState, useEffect, useRef } from 'react';
+import SpeedControl from './components/SpeedControl';
+import ChordDisplay from './components/ChordDisplay';
+import { guitarChords } from './config';
+
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [speed, setSpeed] = useState(1.0);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [currentChord, setCurrentChord] = useState(null);
+    const intervalRef = useRef(null);
+
+    const getRandomChord = () => {
+        const randomIndex = Math.floor(Math.random() * guitarChords.length);
+        return guitarChords[randomIndex];
+    };
+
+    useEffect(() => {
+        if (isPlaying) {
+            setCurrentChord(getRandomChord());
+            intervalRef.current = setInterval(() => {
+                setCurrentChord(getRandomChord());
+            }, speed * 1000);
+        } else {
+            clearInterval(intervalRef.current);
+        }
+
+        return () => clearInterval(intervalRef.current);
+    }, [isPlaying, speed]);
+
+    return (
+        <div className="App">
+            <SpeedControl 
+                speed={speed}
+                setSpeed={setSpeed}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+            />
+            <ChordDisplay currentChord={currentChord} />
+        </div>
+    );
 }
 
 export default App;

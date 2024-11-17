@@ -1,0 +1,41 @@
+.speed-control {
+    margin: 20px;
+    text-align: center;
+}
+
+.speed-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.speed-inputs input {
+    width: 80px;
+    padding: 5px;
+}
+
+.speed-inputs button {
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.speed-display {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.current-chord {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 20px;
+}
