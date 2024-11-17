@@ -39,3 +39,8 @@
     font-weight: bold;
     margin-top: 20px;
 }
+
+.custom-progress-bar {
+    height: 3px;
+    background-color:lightblue;
+}
